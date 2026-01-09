@@ -1,4 +1,5 @@
 ﻿using FirstMVCProject.Models;
+using FirstMVCProject.Repositorys;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +7,18 @@ namespace FirstMVCProject.Controllers
 {
     public class ContactController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IContacts _contacts;
 
-        public ContactController(ILogger<HomeController> logger)
+        public ContactController(IContacts contactsRepository)
         {
-            _logger = logger;
+            _contacts = contactsRepository;
         }
 
         public IActionResult Contacts()
         {
-            return View();
+            List<ContactModel> listaContatos = _contacts.BuscarTodos();
+
+            return View(listaContatos);
         }
 
         public IActionResult AddContacts()
@@ -28,9 +31,27 @@ namespace FirstMVCProject.Controllers
             return View();
         }
 
-        public IActionResult DeleteContacts()
+        public IActionResult DeleteContacts(int id)
         {
-            return View();
+            ContactModel contact = _contacts.BuscarContato(id);
+
+            return View(contact);
+        }
+
+        [HttpPost]
+        public IActionResult AddContacts(ContactModel contact)
+        {
+            _contacts.AddContact(contact);
+
+            return RedirectToAction("Contacts");
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteContacts(ContactModel contact)
+        {
+           _contacts.DeleteContact(contact);
+
+            return RedirectToAction("Contacts");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

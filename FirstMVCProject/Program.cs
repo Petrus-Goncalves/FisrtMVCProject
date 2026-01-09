@@ -1,7 +1,19 @@
+using FirstMVCProject.Data;
+using FirstMVCProject.Repositorys;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<BDContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DataBase")
+    )
+);
+
+builder.Services.AddScoped<IContacts, ContactsRepository>();
 
 var app = builder.Build();
 

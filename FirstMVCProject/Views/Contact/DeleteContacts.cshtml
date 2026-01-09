@@ -1,17 +1,25 @@
-﻿@model HomeModel
+﻿@model ContactModel
 
 @{
     ViewData["Title"] = "Confirmação de exclusão de contato";
 }
-<br />
-<br />
-<div class="text-center">
-    <h3>Realmente deseja apagar o contato (Pétrus)?</h3>
-</div>
 
-<br />
-<br />
-<div class="justify-content-center gap-2 d-md-flex">
-    <a class="btn btn-danger">Cancelar exclusão</a>
-    <a class="btn btn-primary">Confirmar exclusão</a>
-</div>
+@if (Model != null)
+{
+    <form asp-controller="Contact" asp-action="DeleteContacts" method="delete">
+
+        <br />
+        <br />
+
+        <div class="text-center">
+            <h3>Realmente deseja apagar o contato @Model.Nome ?</h3>
+        </div>
+
+        <br />
+        <br />
+        <div class="justify-content-center gap-2 d-md-flex">
+            <a class="btn btn-danger" asp-controller="Contact" asp-action="Contacts">Cancelar exclusão</a>
+            <a class="btn btn-primary" type="submit" asp-controller="Contact" asp-action="DeleteContacts">Confirmar exclusão</a>
+        </div>
+    </form>
+}
