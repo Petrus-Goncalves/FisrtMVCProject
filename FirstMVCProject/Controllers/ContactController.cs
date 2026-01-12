@@ -2,6 +2,7 @@
 using FirstMVCProject.Repositorys;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FirstMVCProject.Controllers
 {
@@ -26,9 +27,11 @@ namespace FirstMVCProject.Controllers
             return View();
         }
 
-        public IActionResult EditContacts()
+        public IActionResult EditContacts(int id)
         {
-            return View();
+            ContactModel contact = _contacts.BuscarContato(id);
+
+            return View(contact);
         }
 
         public IActionResult DeleteContacts(int id)
@@ -41,17 +44,65 @@ namespace FirstMVCProject.Controllers
         [HttpPost]
         public IActionResult AddContacts(ContactModel contact)
         {
-            _contacts.AddContact(contact);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(contact);
+                }
 
-            return RedirectToAction("Contacts");
+                _contacts.AddContact(contact);
+                TempData["SucessMessage"] = "Contato cadastrado com sucesso";
+
+                return RedirectToAction("Contacts");
+            }
+            catch (Exception erro)
+            {
+                TempData["ErrorMessage"] = $"Ops, não conseguimos cadastrar seu contato. Tente novamente. Erro: {erro.Message}";
+                return View(contact);
+            }
         }
 
-        [HttpDelete]
-        public IActionResult DeleteContacts(ContactModel contact)
+        [HttpPost]
+        public IActionResult ConfirmationEditContact(ContactModel contact)
         {
-           _contacts.DeleteContact(contact);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View("EditContacts", contact);
+                }
 
-            return RedirectToAction("Contacts");
+                _contacts.EditContact(contact);
+                TempData["SucessEditMessage"] = "Contato editado com sucesso";
+
+                return View("EditContacts", contact);
+            }
+            catch (Exception erro)
+            {
+                TempData["ErrorEditMessage"] = $"Ops, não conseguimos atualizar o seu contato. Tente novamente. Erro: {erro.Message}";
+                return View("EditContacts", contact);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmationDeleteContact(int id)
+        {
+            try
+            {
+                ContactModel contact = _contacts.BuscarContato(id);
+                _contacts.DeleteContact(contact);
+
+                TempData["SucessDeleteMessage"] = "Contato excluído com sucesso";
+
+                return RedirectToAction("Contacts");
+            }
+            catch (Exception erro)
+            {
+                TempData["ErrorDeleteMessage"] = $"Ops, não foi possível excluir o contato. Tente novamente. Erro: {erro.Message}";
+
+                return RedirectToAction("Contacts");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

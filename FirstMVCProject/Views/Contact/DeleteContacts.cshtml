@@ -6,7 +6,7 @@
 
 @if (Model != null)
 {
-    <form asp-controller="Contact" asp-action="DeleteContacts" method="delete">
+    <form asp-controller="Contact" asp-action="ConfirmationDeleteContact" method="post">
 
         <br />
         <br />
@@ -19,7 +19,7 @@
         <br />
         <div class="justify-content-center gap-2 d-md-flex">
             <a class="btn btn-danger" asp-controller="Contact" asp-action="Contacts">Cancelar exclusão</a>
-            <a class="btn btn-primary" type="submit" asp-controller="Contact" asp-action="DeleteContacts">Confirmar exclusão</a>
+            <button class="btn btn-primary" type="submit" asp-route-id="@Model.Id" asp-controller="Contact" asp-action="ConfirmationDeleteContact">Confirmar exclusão</button>
         </div>
     </form>
 }

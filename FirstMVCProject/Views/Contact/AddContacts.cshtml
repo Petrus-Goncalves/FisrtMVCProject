@@ -8,17 +8,20 @@
     <div class="text-center">
         <h1 class="display-4">Cadastrar contato</h1>
 
-        <div class="mb-3">
+        <div class="form-group text-start">
             <label for="formGroupExampleInput" class="form-label d-grid gap-2 d-md-flex justify-content-md-start">Nome</label>
             <input type="text" asp-for="Nome" class="form-control" id="formGroupExampleInput" placeholder="Exemplo: José da Silva">
+            @Html.ValidationMessageFor(x => x.Nome)
         </div>
-        <div class="mb-3">
+        <div class="form-group text-start">
             <label for="formGroupExampleInput2" class="form-label d-grid gap-2 d-md-flex justify-content-md-start">Email</label>
             <input type="text" asp-for="Email" class="form-control" id="formGroupExampleInput2" placeholder="Exemplo: josedasilva@gmail.com">
+            @Html.ValidationMessageFor(x => x.Email)
         </div>
-        <div class="mb-3">
+        <div class="form-group text-start">
             <label for="formGroupExampleInput2" class="form-label d-grid gap-2 d-md-flex justify-content-md-start">Celular</label>
             <input type="text" asp-for="Celular" class="form-control" id="formGroupExampleInput2" placeholder="Exemplo: 24996545690">
+            @Html.ValidationMessageFor(x => x.Celular)
         </div>
 
         <button class="btn btn-primary" type="submit">Adicionar</button>

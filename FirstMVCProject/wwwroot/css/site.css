@@ -1,22 +1,152 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.close-alert {
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    border-radius: 10px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 10px;
+}
+
+#tabela-contatos_wrapper {
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+#tabela-contatos_wrapper .dt-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#tabela-contatos_wrapper .dt-search label {
+    font-weight: 600;
+    color: #374151;
+}
+
+#tabela-contatos_wrapper .dt-search .dt-input {
+    border-radius: 25px;
+    padding: 6px 14px;
+    border: 1px solid #ced4da;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#tabela-contatos_wrapper .dt-search .dt-input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
+
+#tabela-contatos_wrapper .dt-length {
+    margin-bottom: 10px;
+}
+
+#tabela-contatos_wrapper .dt-length label {
+    font-weight: 500;
+}
+
+#tabela-contatos_wrapper .dt-length select {
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+#tabela-contatos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabela-contatos thead th {
+    background-color: #0d6efd;
+    color: #ffffff;
+    padding: 10px;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+#tabela-contatos tbody td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+#tabela-contatos tbody tr {
+    transition: background-color 0.2s;
+}
+
+#tabela-contatos tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+#tabela-contatos_wrapper th.dt-orderable-asc,
+#tabela-contatos_wrapper th.dt-orderable-desc {
+    cursor: pointer;
+}
+
+#tabela-contatos_wrapper th.dt-ordering-asc,
+#tabela-contatos_wrapper th.dt-ordering-desc {
+    background-color: #0d6efd;
+}
+
+#tabela-contatos_wrapper .dt-paging {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+#tabela-contatos_wrapper .dt-paging-button {
+    padding: 6px 12px;
+    margin: 0 2px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    color: #ffffff;
+    transition: all 0.2s;
+}
+
+#tabela-contatos_wrapper .dt-paging-button:hover {
+    background-color: #e5e7eb;
+}
+
+#tabela-contatos_wrapper .dt-paging-button.current {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #ffffff;
+}
+
+#tabela-contatos_wrapper .dt-info {
+    margin-top: 10px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.9rem;
 }

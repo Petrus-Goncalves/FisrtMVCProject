@@ -7,6 +7,7 @@ namespace FirstMVCProject.Repositorys
         List<ContactModel> BuscarTodos();
         ContactModel BuscarContato(int id);
         ContactModel AddContact(ContactModel contact);
+        ContactModel EditContact(ContactModel contact);
         ContactModel DeleteContact(ContactModel contact);
     }
 }

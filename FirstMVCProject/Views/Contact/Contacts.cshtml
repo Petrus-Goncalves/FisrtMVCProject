@@ -4,6 +4,40 @@
     ViewData["Title"] = "Listagem de contatos";
 }
 
+@if (TempData["SucessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+        @TempData["SucessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SucessDeleteMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+        @TempData["SucessDeleteMessage"]
+    </div>
+}
+
+@if (TempData["ErrorDeleteMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+        @TempData["ErrorDeleteMessage"]
+    </div>
+}
+
+<br />
+
 <div class="text-center">
     <h1 class="display-4">Listagem de contatos</h1>
     <br />
@@ -14,7 +48,7 @@
     </div>
     <br />
 
-    <table class="table">
+    <table class="table" id="tabela-contatos">
         <thead>
             <tr>
                 <th scope="col">Id</th>
@@ -25,9 +59,9 @@
             </tr>
         </thead>
         <tbody>
-            @if(Model != null && Model.Any())
+            @if (Model != null && Model.Any())
             {
-                foreach(var contato in Model)
+                foreach (var contato in Model)
                 {
                     <tr>
                         <th scope="row">@contato.Id</th>

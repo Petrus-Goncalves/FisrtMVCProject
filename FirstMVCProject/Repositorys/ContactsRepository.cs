@@ -27,6 +27,20 @@ namespace FirstMVCProject.Repositorys
             return contact;
         }
 
+        public ContactModel EditContact(ContactModel contact)
+        {
+            ContactModel contactEntity = BuscarContato(contact.Id);
+
+            contactEntity.Celular = contact.Celular;
+            contactEntity.Email = contact.Email;    
+            contactEntity.Nome = contact.Nome;
+
+            _bancoContext.Update(contactEntity);
+            _bancoContext.SaveChanges();
+
+            return contact;
+        }
+
         public ContactModel DeleteContact(ContactModel contact)
         {
             _bancoContext.Contacts.Remove(contact);
@@ -34,6 +48,5 @@ namespace FirstMVCProject.Repositorys
 
             return contact;
         }
-
     }
 }
