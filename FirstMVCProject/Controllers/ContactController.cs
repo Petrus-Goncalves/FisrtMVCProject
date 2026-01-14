@@ -1,8 +1,7 @@
 ﻿using FirstMVCProject.Models;
-using FirstMVCProject.Repositorys;
+using FirstMVCProject.Repositorys.Contacts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FirstMVCProject.Controllers
 {

@@ -1,5 +1,6 @@
 using FirstMVCProject.Data;
-using FirstMVCProject.Repositorys;
+using FirstMVCProject.Repositorys.Contacts;
+using FirstMVCProject.Repositorys.Users;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<BDContext>(options =>
 );
 
 builder.Services.AddScoped<IContacts, ContactsRepository>();
+builder.Services.AddScoped<IUsers, UsersRepository>();
 
 var app = builder.Build();
 
@@ -34,6 +36,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Login}/{id?}");
 
 app.Run();

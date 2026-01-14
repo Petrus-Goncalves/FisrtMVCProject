@@ -13,14 +13,9 @@ namespace FirstMVCProject.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(HomeModel model)
         {
-            HomeModel homeModel = new HomeModel();
-
-            homeModel.Nome = "Pétrus Gonçalves";
-            homeModel.Email = "petrusteixeira@hotmail.com";
-
-            return View(homeModel);
+            return View(model);
         }
 
         public IActionResult Privacy()
