@@ -1,0 +1,36 @@
+﻿@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<form asp-controller="Login" asp-action="Login" method="post">
+
+
+    @if (TempData["ErrorInvalidLoginMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+            @TempData["ErrorInvalidLoginMessage"]
+        </div>
+    }
+
+    <div class="text-center">
+        <br />
+        <h1>Login</h1>
+        <br />
+
+        <div class="form-group">
+            <label class="form-label d-grid gap-2 d-md-flex justify-content-md-start">Email</label>
+            <input asp-for="Email" type="email" class="form-control" placeholder="Exemplo: josedasilva@hotmail.com" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label class="form-label d-grid gap-2 d-md-flex justify-content-md-start">Senha</label>
+            <input asp-for="Senha" type="password" class="form-control" placeholder="Exemplo: jose123456" />
+        </div>
+
+        <br />
+        <button class="btn btn-primary" type="submit">Login</button>
+    </div>
+</form>
