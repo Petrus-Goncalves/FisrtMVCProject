@@ -15,9 +15,9 @@ namespace FirstMVCProject.Repositorys.Contacts
             return _bancoContext.Contacts.ToList();
         }
 
-        public ContactModel BuscarContato(int id)
+        public ContactModel BuscarContato(ContactModel contact)
         {
-            return _bancoContext.Contacts.FirstOrDefault(x => x.Id == id);
+            return _bancoContext.Contacts.FirstOrDefault(x => x.Id == contact.Id);
         }
         public ContactModel AddContact(ContactModel contact)
         {
@@ -29,7 +29,7 @@ namespace FirstMVCProject.Repositorys.Contacts
 
         public ContactModel EditContact(ContactModel contact)
         {
-            ContactModel contactEntity = BuscarContato(contact.Id);
+            ContactModel contactEntity = BuscarContato(contact);
 
             contactEntity.Celular = contact.Celular;
             contactEntity.Email = contact.Email;    

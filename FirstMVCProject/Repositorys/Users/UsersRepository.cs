@@ -20,7 +20,7 @@ namespace FirstMVCProject.Repositorys.Users
         {
             return _bancoContext.Users.Find(model.Id);
         }
-        public List<UserModel> BuscarTodos(UserModel model)
+        public List<UserModel> BuscarTodos()
         {
             List<UserModel> lista = _bancoContext.Users.ToList();
 

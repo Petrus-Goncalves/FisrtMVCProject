@@ -14,7 +14,9 @@ namespace FirstMVCProject.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<UserModel> usuarios = _usersRepository.BuscarTodos();
+
+            return View(usuarios);
         }
 
         public IActionResult AddUsers()
@@ -27,9 +29,11 @@ namespace FirstMVCProject.Controllers
             return View();
         }
 
-        public IActionResult EditUsers()
+        public IActionResult EditUser(UserModel model)
         {
-            return View();
+            UserModel user = _usersRepository.BuscarUsuarioId(model);
+
+            return View(user);
         }
 
         [HttpPost]
