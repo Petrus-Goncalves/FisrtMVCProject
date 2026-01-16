@@ -1,4 +1,5 @@
 ﻿using FirstMVCProject.Models;
+using FirstMVCProject.Models.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace FirstMVCProject.Data

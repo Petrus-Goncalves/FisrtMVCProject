@@ -1,9 +1,25 @@
-﻿@model List<UserModel>
+﻿@using FirstMVCProject.Models.User
+@model List<UserModel>
 
 @{
     ViewData["Title"] = "Usuário";
 }
 
+@if (TempData["SucessEditMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+        @TempData["SucessEditMessage"]
+    </div>
+}
+
+@if (TempData["ErrorEditMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+        @TempData["ErrorEditMessage"]
+    </div>
+}
 
 <div class="text-center">
     <h1 class="display-4">Listagem de usuários</h1>
@@ -11,7 +27,7 @@
     <br />
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a class="btn btn-primary" asp-controller="Contact" asp-action="AddContacts">Criar novo usuário</a>
+        <a class="btn btn-primary" asp-controller="User" asp-action="AddUsers">Criar novo usuário</a>
     </div>
     <br />
 
@@ -38,8 +54,8 @@
                         <td>@contato.DataCriacao</td>
                         <td>
                             <div class="btn-group-sm d-grid gap-2 d-md-flex justify-content-center">
-                                <a class="btn btn-primary" asp-route-id="@contato.Id" asp-controller="Contact" asp-action="EditUsers">Editar</a>
-                                <a class="btn btn-danger" asp-route-id="@contato.Id" asp-controller="Contact" asp-action="DeleteUsers">Apagar</a>
+                                <a class="btn btn-primary" asp-route-id="@contato.Id" asp-controller="User" asp-action="EditUser" method="get">Editar</a>
+                                <a class="btn btn-danger" asp-route-id="@contato.Id" asp-controller="User" asp-action="DeleteUser">Apagar</a>
                             </div>
                         </td>
                     </tr>

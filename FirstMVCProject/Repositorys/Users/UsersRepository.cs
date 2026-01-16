@@ -1,5 +1,6 @@
 ﻿using FirstMVCProject.Data;
 using FirstMVCProject.Models;
+using FirstMVCProject.Models.User;
 
 namespace FirstMVCProject.Repositorys.Users
 {
@@ -16,9 +17,9 @@ namespace FirstMVCProject.Repositorys.Users
             return _bancoContext.Users.Where(x => x.Email == model.Email && x.Senha == model.Senha).FirstOrDefault();
         }
 
-        public UserModel BuscarUsuarioId(UserModel model)
+        public UserModel BuscarUsuarioId(int id)
         {
-            return _bancoContext.Users.Find(model.Id);
+            return _bancoContext.Users.Find(id);
         }
         public List<UserModel> BuscarTodos()
         {
@@ -27,7 +28,7 @@ namespace FirstMVCProject.Repositorys.Users
             return lista;
         }
         public UserModel AddUser(UserModel model)
-        {
+        {   
             _bancoContext.Users.Add(model);
             _bancoContext.SaveChanges();
 
@@ -41,6 +42,8 @@ namespace FirstMVCProject.Repositorys.Users
             user.Nome = model.Nome;
             user.Login = model.Login;
             user.Email = model.Email;
+            user.Perfil = model.Perfil;
+            user.Senha = model.Senha;
             user.DataAlteracao = DateTime.Now;
 
             _bancoContext.Update(user);
@@ -49,14 +52,14 @@ namespace FirstMVCProject.Repositorys.Users
             return model;
         }
 
-        public UserModel DeleteUser(UserModel model)
+        public UserModel DeleteUser(int id)
         {
-            UserModel user = _bancoContext.Users.Find(model.Id);
+            UserModel user = _bancoContext.Users.Find(id);
 
             _bancoContext.Users.Remove(user);
             _bancoContext.SaveChanges();
 
-            return model;
+            return user;
         }
     }
 }
