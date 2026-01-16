@@ -7,11 +7,18 @@
 <form asp-controller="Login" asp-action="Login" method="post">
 
 
-    @if (TempData["ErrorInvalidLoginMessage"] != null)
+    @if (TempData["ErrorLoginEmailMessage"] != null)
     {
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-danger" role="alert">
             <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
-            @TempData["ErrorInvalidLoginMessage"]
+            @TempData["ErrorLoginEmailMessage"]
+        </div>
+    }
+    @if (TempData["ErrorLoginPasswordMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+            @TempData["ErrorLoginPasswordMessage"]
         </div>
     }
 
@@ -22,7 +29,7 @@
 
         <div class="form-group">
             <label class="form-label d-grid gap-2 d-md-flex justify-content-md-start">Login</label>
-            <input asp-for="Email" type="email" class="form-control" placeholder="Exemplo: josedasilva@hotmail.com" />
+            <input asp-for="Email" type="text" class="form-control" placeholder="Exemplo: josedasilva@hotmail.com" />
         </div>
         <br />
         <div class="form-group">

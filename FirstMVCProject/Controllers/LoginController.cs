@@ -1,6 +1,8 @@
 ﻿using FirstMVCProject.Models;
+using FirstMVCProject.Models.User;
 using FirstMVCProject.Repositorys.Users;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FirstMVCProject.Controllers
 {
@@ -14,7 +16,7 @@ namespace FirstMVCProject.Controllers
 
         public IActionResult Login()
         {
-            return View();
+            return View("Login");
         }
 
         [HttpPost]
@@ -24,10 +26,20 @@ namespace FirstMVCProject.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    if (login.Email == null)
+                    {
+                        TempData["ErrorLoginEmailMessage"] = "O login é obrigatório";
+                    }
+
+                    if (login.Senha == null)
+                    {
+                        TempData["ErrorLoginPasswordMessage"] = "A senha é obrigatória";
+                    }
+
                     return View(login);
                 }
 
-                var existeUsuario = _usersRepository.ExisteUsuarioEmailSenha(login);
+                var existeUsuario = _usersRepository.BuscarUsuarioEmailSenha(login);
 
                 if (existeUsuario == null)
                 {

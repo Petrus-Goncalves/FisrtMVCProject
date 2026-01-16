@@ -12,9 +12,9 @@ namespace FirstMVCProject.Repositorys.Users
         {
             _bancoContext = bancoContext;
         }
-        public UserModel ExisteUsuarioEmailSenha(LoginModel model)
+        public UserModel BuscarUsuarioEmailSenha(LoginModel model)
         {
-            return _bancoContext.Users.Where(x => x.Email == model.Email && x.Senha == model.Senha).FirstOrDefault();
+            return _bancoContext.Users.Where(x => x.Login == model.Email && x.Senha == model.Senha).FirstOrDefault();
         }
 
         public UserModel BuscarUsuarioId(int id)
