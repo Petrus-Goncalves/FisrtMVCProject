@@ -1,8 +1,6 @@
 ﻿using FirstMVCProject.Models;
-using FirstMVCProject.Models.User;
 using FirstMVCProject.Repositorys.Users;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FirstMVCProject.Controllers
 {
@@ -41,14 +39,14 @@ namespace FirstMVCProject.Controllers
 
                 var existeUsuario = _usersRepository.BuscarUsuarioEmailSenha(login);
 
-                if (existeUsuario == null)
+                if (existeUsuario != null)
                 {
-                    TempData["ErrorInvalidLoginMessage"] = $"Usuário ou senha não cadastrados";
-                    return View(login);
+                    HomeModel view = new HomeModel() { Email = login.Email, Nome = existeUsuario.Nome };
+                    return RedirectToAction("Index", "Home", view);
                 }
 
-                HomeModel view = new HomeModel() { Email = login.Email, Nome = existeUsuario.Nome };
-                return RedirectToAction("Index", "Home", view);
+                TempData["ErrorInvalidLoginMessage"] = $"Usuário ou senha não cadastrados";
+                return View(login);
             }
             catch (Exception erro)
             {
