@@ -1,4 +1,5 @@
 using FirstMVCProject.Data;
+using FirstMVCProject.Helper;
 using FirstMVCProject.Repositorys.Contacts;
 using FirstMVCProject.Repositorys.Users;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +15,18 @@ builder.Services.AddDbContext<BDContext>(options =>
     )
 );
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddScoped<IContacts, ContactsRepository>();
 builder.Services.AddScoped<IUsers, UsersRepository>();
+builder.Services.AddScoped<ISessao, Sessao>();
+
+builder.Services.AddSession(o =>
+{
+    o.Cookie.HttpOnly = true;
+    o.Cookie.IsEssential = true;
+});
+
 
 var app = builder.Build();
 
@@ -33,6 +44,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

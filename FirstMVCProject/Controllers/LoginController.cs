@@ -1,4 +1,6 @@
-﻿using FirstMVCProject.Models;
+﻿using FirstMVCProject.Helper;
+using FirstMVCProject.Models;
+using FirstMVCProject.Models.User;
 using FirstMVCProject.Repositorys.Users;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,14 +9,21 @@ namespace FirstMVCProject.Controllers
     public class LoginController : Controller
     {
         private readonly IUsers _usersRepository;
-        public LoginController(IUsers usersRepository)
+        private readonly ISessao _sessao;
+        public LoginController(IUsers usersRepository, ISessao sessao)
         {
             _usersRepository = usersRepository;
+            _sessao = sessao;
         }
 
         public IActionResult Login()
         {
-            return View("Login");
+            if(_sessao.BuscarSessaoUsuario() != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -41,6 +50,8 @@ namespace FirstMVCProject.Controllers
 
                 if (existeUsuario != null)
                 {
+                    _sessao.CriarSessaoUsuario(existeUsuario);
+
                     HomeModel view = new HomeModel() { Email = login.Email, Nome = existeUsuario.Nome };
                     return RedirectToAction("Index", "Home", view);
                 }
@@ -53,6 +64,19 @@ namespace FirstMVCProject.Controllers
                 TempData["ErrorLoginMessage"] = $"Ops, não foi possível realizar o seu login. Tente novamente. Erro: {erro.Message}";
                 return View(login);
             }
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            return View("Logout");
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmLogout(int id)
+        {
+            _sessao.RemoverSessaoUsuario();
+            return View("Login");
         }
     }
 }
