@@ -1,0 +1,32 @@
+﻿
+
+@{
+    ViewData["Title"] = "Sair";
+}
+
+<form asp-controller="Login" asp-action="ConfirmLogout" method="post">
+
+    @if (TempData["ErrorLoginEmailMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+            @TempData["ErrorLoginEmailMessage"]
+        </div>
+    }
+    @if (TempData["ErrorLoginPasswordMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+            @TempData["ErrorLoginPasswordMessage"]
+        </div>
+    }
+
+    <div class="text-center">
+        <br />
+        <h1>Você deseja realmente sair?</h1>
+        <br />
+        <br />
+        <button class="btn btn-primary" type="submit">Confirmar</button>
+        <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Voltar</a>
+    </div>
+</form>
